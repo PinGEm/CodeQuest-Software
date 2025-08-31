@@ -12,6 +12,7 @@ namespace CYoureSharpPackage
     {
         private readonly string source;
         private readonly List<Token> tokens = new List<Token>();
+
         private int start = 0;
         private int current = 0;
         private int line = 1;
@@ -27,13 +28,13 @@ namespace CYoureSharpPackage
             {"select", TokenType.SELECT}
         };
 
-        Scanner(string source, int line)
+        public Scanner(string source, int line)
         {
             this.source = source;
             this.line = line;
         }
 
-        List<Token> ScanTokens()
+        public List<Token> ScanTokens()
         {
             while (!IsAtEnd())
             {
@@ -65,9 +66,9 @@ namespace CYoureSharpPackage
                 case ',':
                     AddToken(TokenType.COMMA);
                     break;
-                case ';':
+                /*case ';':
                     AddToken(TokenType.SEMICOLON);
-                    break;
+                    break; */
                     // IGNORING WHITE SPACE
                 case ' ':
                 case '\r':

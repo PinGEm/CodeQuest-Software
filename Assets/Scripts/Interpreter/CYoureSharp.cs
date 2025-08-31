@@ -11,6 +11,7 @@ namespace CYoureSharpPackage
     {
         static bool hadError = false;
         [SerializeField] private TMP_InputField userInput;
+        [SerializeField] private TMP_Text outputText;
 
         public void onRunButtonPress()
         {
@@ -37,8 +38,19 @@ namespace CYoureSharpPackage
 
         void Run(string source, int lineNumber)
         {
-            Debug.Log("Testing and Running: " + source);
-            // Scanner -> Parser -> Interpreter goes here
+            Scanner scanner = new Scanner(source, lineNumber);
+            List<Token> tokens = scanner.ScanTokens();
+
+            Parser parser = new Parser(tokens);
+            Expr expression = parser.Parse();
+
+            if (hadError)
+            {
+                return;
+            }
+
+            outputText.text = expression.ToString();
+            Debug.Log("Parsed Expression: " + expression);
         }
 
         public static void Error(int line, string message)
@@ -46,10 +58,15 @@ namespace CYoureSharpPackage
             Report(line, "", message);
         }
 
-        private static void Report(int line, string where, string message)
+        static void Report(int line, string where, string message)
         {
             Debug.LogError($"[line: {line}] Error {where}: {message}");
             hadError = true;
+        }
+
+        public static void ExternalReport(int line, string where, string message)
+        {
+            Report(line, where, message);
         }
     }
 }
