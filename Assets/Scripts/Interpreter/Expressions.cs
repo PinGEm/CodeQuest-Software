@@ -33,7 +33,7 @@ namespace CYoureSharpPackage
 
             public override string ToString()
             {
-                return $"SwapExpr({var1}, {var2})";
+                return $"SwapExpr({var1},{var2})";
             }
         }
 
@@ -50,7 +50,7 @@ namespace CYoureSharpPackage
 
             public override string ToString()
             {
-                return $"SelectExpr({var1}, {var2})";
+                return $"SelectExpr({var1},{var2})";
             }
         }
 

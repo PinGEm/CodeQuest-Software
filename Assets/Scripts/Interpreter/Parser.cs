@@ -53,13 +53,17 @@ namespace CYoureSharpPackage
                 case TokenType.SWAP:
                     {
                         Token firstVar = Advance();
+                        firstVar = Advance(); // TEMPORARY FOR NOW
                         Token secondVar = Advance();
+                        secondVar = Advance(); // TEMPORARY FOR NOW
                         return new Expr.SwapExpr(firstVar.lexeme, secondVar.lexeme);
                     }
                 case TokenType.SELECT:
                     {
                         Token firstVar_Select = Advance();
+                        firstVar_Select = Advance(); // TEMPORARY FOR NOW
                         Token secondVar_Select = Advance();
+                        secondVar_Select = Advance(); // TEMPORARY FOR NOW
                         return new Expr.SelectExpr(firstVar_Select.lexeme, secondVar_Select.lexeme);
                     }
                 case TokenType.FUNC:

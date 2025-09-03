@@ -51,6 +51,8 @@ namespace CYoureSharpPackage
 
             outputText.text = expression.ToString();
             Debug.Log("Parsed Expression: " + expression);
+
+            Interpreter interpreter = new Interpreter(expression);
         }
 
         public static void Error(int line, string message)
