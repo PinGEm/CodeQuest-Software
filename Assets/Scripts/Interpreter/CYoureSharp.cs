@@ -70,5 +70,12 @@ namespace CYoureSharpPackage
         {
             Report(line, where, message);
         }
+
+
+        // TEMPORARY FUNCTION FOR SWAPPING GRIDS
+        public void GridSwap()
+        {
+
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.ExceptionServices;
 
 namespace CYoureSharpPackage
 {
@@ -56,6 +57,17 @@ namespace CYoureSharpPackage
                         firstVar = Advance(); // TEMPORARY FOR NOW
                         Token secondVar = Advance();
                         secondVar = Advance(); // TEMPORARY FOR NOW
+
+                        if (firstVar.type != TokenType.NUMBER)
+                        {
+                            throw Error(firstVar, $"Unexpected Token: {token.lexeme}");
+                        }
+
+                        if (secondVar.type != TokenType.NUMBER)
+                        {
+                            throw Error(secondVar, $"Unexpected Token: {token.lexeme}");
+                        }
+
                         return new Expr.SwapExpr(firstVar.lexeme, secondVar.lexeme);
                     }
                 case TokenType.SELECT:

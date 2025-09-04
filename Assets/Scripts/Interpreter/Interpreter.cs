@@ -43,18 +43,21 @@ namespace CYoureSharpPackage
         private void RunMove(string direction)
         {
             // Place here necessary implementation in order to store the data inside the CYoureSharp.cs
+            DataManager.Instance.MoveFunction(direction);
             Debug.Log($"[INTERPRETER]: Moving {direction}");
         }
 
         private void RunSwap(string v1, string v2)
         {
             // Place here necessary implementation in order to store the data inside the CYoureSharp.cs
+            DataManager.Instance.SwapFunction(int.Parse(v1), int.Parse(v2));
             Debug.Log($"[INTERPRETER]: Swapping {v1} with {v2}");
         }
 
         private void RunSelect(string v1, string v2)
         {
             // Place here necessary implementation in order to store the data inside the CYoureSharp.cs
+            DataManager.Instance.InputSelectData(v1, v2);
             Debug.Log($"[INTERPRETER]: Selecting {v1} and {v2}");
         }
 
