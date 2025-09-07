@@ -31,7 +31,7 @@ public class GameManagerScript : MonoBehaviour
                 piece.name = $"{(row * size) + col}"; // Assigns a name to each quad (indexes them)
                                                       // May be used to make it easier for us to detect if the game is complete
 
-         
+
                 // Hopefully this will merge the whole picture, if not, fucking nuke the whole thing.
                 float gap = gapThickness / 2;
                 Mesh mesh = piece.GetComponent<MeshFilter>().mesh;
@@ -46,6 +46,17 @@ public class GameManagerScript : MonoBehaviour
 
                 // Assign new UVs to the mesh
                 mesh.uv = uv;
+
+                // Identifying Blocks Outside Of Class
+                int[] blockCoords = { row, col };
+                DataManager.Instance.blocks.Add((row,col), piece.gameObject);
+
+                GameObject temp;
+                if (DataManager.Instance.blocks.TryGetValue((row,col), out temp))
+                {
+                    Debug.Log("this item is in fact added: " + temp.name);
+                    Debug.Log("The key for this item is: " + blockCoords[0] + "," + blockCoords[1]);
+                }
             }
         }
     }

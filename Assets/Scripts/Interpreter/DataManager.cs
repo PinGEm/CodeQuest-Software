@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CYoureSharpPackage;
 
 public class DataManager : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class DataManager : MonoBehaviour
 
     public int swap_X { get; private set; }
     public int swap_Y { get; private set; }
+
+    public Dictionary<(int, int), GameObject> blocks = new Dictionary<(int, int), GameObject>();
+
+    private GameObject selectedGameObject;
+    private GameObject swapGameObject;
 
     public static DataManager Instance { get; private set; }
 
@@ -28,12 +34,13 @@ public class DataManager : MonoBehaviour
 
     public void InputSelectData(string var1, string var2)
     {
-        select_X = int.Parse(var1);
-        select_Y = int.Parse(var2);
+        select_X = int.Parse(var1) - 1;
+        select_Y = int.Parse(var2) - 1;
     }
 
     public void MoveFunction(string direction)
     {
+        Debug.Log("Moving function playing");
         switch (direction)
         {
             case "up":
@@ -56,6 +63,12 @@ public class DataManager : MonoBehaviour
         swap_X = var1;
         swap_Y = var2;
 
+        if (!ApplyBlocks())
+        {
+            return;
+        }
+
+        // SWAPPING VALUES NOW
         int temp = swap_X;
         swap_X = select_X;
         select_X = temp;
@@ -63,6 +76,16 @@ public class DataManager : MonoBehaviour
         temp = swap_Y;
         swap_Y = select_Y;
         select_Y = temp;
+
+        // APPLY BLOCK CHANGES
+        blocks[(swap_X, swap_Y)] = swapGameObject;
+        blocks[(select_X, select_Y)] = selectedGameObject;
+
+        Vector2 temp_coords = swapGameObject.transform.position;
+        swapGameObject.transform.position = selectedGameObject.transform.position;
+        selectedGameObject.transform.position = temp_coords;
+
+        ResetData();
     }
 
     public void ResetData()
@@ -72,5 +95,38 @@ public class DataManager : MonoBehaviour
 
         swap_X = -1;
         swap_Y = -1;
+    }
+
+    private bool ApplyBlocks()
+    {
+        int[] selectedBlock = { select_X, select_Y };
+        Debug.Log(selectedBlock[0] + "," + selectedBlock[1]);
+
+        if (blocks.TryGetValue((select_X, select_Y), out selectedGameObject))
+        {
+            selectedGameObject = blocks[(select_X, select_Y)];
+        }
+        else
+        {
+            Debug.LogError("Selected Object not found!");
+            ResetData();
+            return false;
+        }
+
+
+        int[] swapBlock = { swap_X, swap_Y };
+
+        if (blocks.TryGetValue((swap_X, swap_Y), out swapGameObject))
+        {
+            swapGameObject = blocks[(swap_X, swap_Y)];
+        }
+        else
+        {
+            Debug.LogError("Swap Block not found!");
+            ResetData();
+            return false;
+        }
+
+        return true;
     }
 }
