@@ -11,7 +11,7 @@ namespace CYoureSharpPackage
     {
         static bool hadError = false;
         [SerializeField] private TMP_InputField userInput;
-        [SerializeField] private TMP_Text outputText;
+        //[SerializeField] private TMP_Text outputText;
 
         public void onRunButtonPress()
         {
@@ -49,7 +49,7 @@ namespace CYoureSharpPackage
                 return;
             }
 
-            outputText.text = expression.ToString();
+            //outputText.text = expression.ToString();
             Debug.Log("Parsed Expression: " + expression);
 
             Interpreter interpreter = new Interpreter(expression);
