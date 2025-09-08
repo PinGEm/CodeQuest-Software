@@ -50,7 +50,7 @@ namespace CYoureSharpPackage
         private void RunSwap(string v1, string v2)
         {
             // Place here necessary implementation in order to store the data inside the CYoureSharp.cs
-            DataManager.Instance.SwapFunction(int.Parse(v1), int.Parse(v2));
+            DataManager.Instance.SwapFunction(int.Parse(v1), int.Parse(v2), true);
             Debug.Log($"[INTERPRETER]: Swapping {v1} with {v2}");
         }
 

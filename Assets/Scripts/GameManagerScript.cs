@@ -9,7 +9,6 @@ public class GameManagerScript : MonoBehaviour
 
     private int size;
     private List<Transform> pieces;
-    private bool shuffling = false;
 
     // Creates game setup with 3x3 pieces
     private void CreateGamePieces(float gapThickness)
@@ -66,9 +65,11 @@ public class GameManagerScript : MonoBehaviour
         pieces = new List<Transform>();
         size = 3;
         CreateGamePieces(0.01f);
-        StartCoroutine(WaitShuffle(0.5f)); // Will not make the shuffling process instantaneous,
+        DataManager.Instance.Shuffle();
+        //StartCoroutine(WaitShuffle(0.5f)); // Will not make the shuffling process instantaneous,
                                            // Also stops the thing from shuffling endlessly because of the loop
     }
+
 
     // Name each puzzle piece in order so we can check completion
     private bool CheckCompletion()
@@ -86,12 +87,12 @@ public class GameManagerScript : MonoBehaviour
     private IEnumerator WaitShuffle(float duration)
     {
         yield return new WaitForSeconds(duration);
-        Shuffle();
-        shuffling = false;
+        //Shuffle();
+        //shuffling = false;
     }
 
     // Brute force the fuckass shuffling method.
-    private void Shuffle()
+/*    private void Shuffle()
     {
         // Store the current positions of all pieces
         List<Vector3> positions = new List<Vector3>(); // Create new list for each position for the tiles
@@ -112,5 +113,5 @@ public class GameManagerScript : MonoBehaviour
         {
             pieces[i].localPosition = positions[i];
         }
-    }
+    }*/
 }

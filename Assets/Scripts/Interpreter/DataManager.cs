@@ -58,10 +58,18 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void SwapFunction(int var1, int var2)
+    public void SwapFunction(int var1, int var2, bool manualSelect = false)
     {
-        swap_X = var1;
-        swap_Y = var2;
+        if (manualSelect)
+        {
+            swap_X = var1 - 1;
+            swap_Y = var2 - 1;
+        }
+        else
+        {
+            swap_X = var1;
+            swap_Y = var2;
+        }
 
         if (!ApplyBlocks())
         {
@@ -128,5 +136,73 @@ public class DataManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void Shuffle()
+    {
+        int shuffleCount = Random.Range(1000, 3000);
+        Debug.Log("trying to shuffle");
+        for (int i = 0; i < shuffleCount; i++)
+        {
+            // Select Block 
+            select_X = Random.Range(0, 2);
+            select_Y = Random.Range(0, 2);
+
+            if (Random.Range(0, 1) == 0)
+            {
+                if (Random.Range(0, 1) == 0 && select_X < 2)
+                {
+                    select_X++;
+                }
+                else if(select_X != 2 && select_X != 0)
+                {
+                    select_X--;
+                }
+            }
+
+            if (Random.Range(0, 1) == 0)
+            {
+                if (Random.Range(0, 1) == 0 && select_Y < 2)
+                {
+                    select_Y++;
+                }
+                else if(select_X != 2 && select_X != 0)
+                {
+                    select_Y--;
+                }
+            }
+
+            // Swap Block
+            int swapItem_X = Random.Range(0, 2);
+            int swapItem_Y = Random.Range(0, 2);
+
+            if (Random.Range(0, 1) == 1)
+            {
+                if (Random.Range(0, 1) == 0 && swapItem_X < 2)
+                {
+                    swapItem_X++;
+                }
+
+                if (Random.Range(0, 1) == 0 && swapItem_X != 0)
+                {
+                    swapItem_X--;
+                }
+            }
+
+            if (Random.Range(0, 1) == 0)
+            {
+                if (Random.Range(0, 1) == 0 && swapItem_Y < 2)
+                {
+                    swapItem_Y++;
+                }
+
+                if (Random.Range(0, 1) == 0 && swapItem_X != 0)
+                {
+                    swapItem_Y--;
+                }
+            }
+
+            SwapFunction(swapItem_X, swapItem_Y);
+        }
     }
 }
