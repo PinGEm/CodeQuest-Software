@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
@@ -45,6 +46,9 @@ public class GameManagerScript : MonoBehaviour
 
                 // Assign new UVs to the mesh
                 mesh.uv = uv;
+
+                // Attach a script to each tile
+                piece.AddComponent<TilePiece>();
 
                 // Identifying Blocks Outside Of Class
                 int[] blockCoords = { col, row };

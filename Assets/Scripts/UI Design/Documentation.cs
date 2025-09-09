@@ -5,26 +5,30 @@ using UnityEngine;
 public class Documentation : MonoBehaviour
 {
     [SerializeField] private GameObject DocumentationUI;
-    [SerializeField] private GameObject GettingStartedUI, SelectUI, SwapUI, MoveUI, ExampleUI;
+    [SerializeField] private GameObject OutlineUI, GettingStartedUI, SelectUI, SwapUI, MoveUI, Example_1_UI, Example_2_UI, Example_3_UI;
     
 
     public void ShowDocumentation()
     {
+        OutlineUI.SetActive(true);
         DocumentationUI.SetActive(true);
     }
 
     public void ExitDocumentation()
     {
+        OutlineUI.SetActive(false);
         DocumentationUI.SetActive(false);
     }
 
     public void GoTo(GameObject go)
     {
+        OutlineUI.SetActive(false);
         go.SetActive(true);
     }
 
     public void GoBack(GameObject UIMenu)
     {
+        OutlineUI.SetActive(true);
         UIMenu.SetActive(false);
     }
 
@@ -46,7 +50,15 @@ public class Documentation : MonoBehaviour
                 break;
             case 4:
                 MoveUI.SetActive(false);
-                ExampleUI.SetActive(true);
+                Example_1_UI.SetActive(true);
+                break;
+            case 5:
+                Example_1_UI.SetActive(false);
+                Example_2_UI.SetActive(true);
+                break;
+            case 6:
+                Example_2_UI.SetActive(false);
+                Example_3_UI.SetActive(true);
                 break;
         }
     }

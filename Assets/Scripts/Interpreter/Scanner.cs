@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using Unity.VisualScripting;
-using UnityEditor.IMGUI.Controls;
 
 namespace CYoureSharpPackage
 {
