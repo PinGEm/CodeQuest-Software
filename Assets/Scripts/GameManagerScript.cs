@@ -47,8 +47,8 @@ public class GameManagerScript : MonoBehaviour
                 mesh.uv = uv;
 
                 // Identifying Blocks Outside Of Class
-                int[] blockCoords = { row, col };
-                DataManager.Instance.blocks.Add((row,col), piece.gameObject);
+                int[] blockCoords = { col, row };
+                DataManager.Instance.blocks.Add((col,row), piece.gameObject);
 
                 GameObject temp;
                 if (DataManager.Instance.blocks.TryGetValue((row,col), out temp))
