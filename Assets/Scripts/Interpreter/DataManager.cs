@@ -116,6 +116,9 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            int tempX = select_X += 1;
+            int tempY = select_Y += 1;
+            CYoureSharp.ExternalReport($"Selected Object at Coordinates ({tempX},{tempY}) not Found!");
             Debug.LogError("Selected Object not found!");
             ResetData();
             return false;
@@ -130,6 +133,9 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            int tempX = swap_X += 1;
+            int tempY = swap_Y += 1;
+            CYoureSharp.ExternalReport($"Swapped Object at Coordinates ({tempX},{tempY}) not Found!");
             Debug.LogError("Swap Block not found!");
             ResetData();
             return false;
