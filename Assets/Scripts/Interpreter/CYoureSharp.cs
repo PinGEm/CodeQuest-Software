@@ -4,6 +4,7 @@ using UnityEngine;
 using CYoureSharpPackage;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 namespace CYoureSharpPackage
 {
@@ -18,10 +19,26 @@ namespace CYoureSharpPackage
             hadError = false;
             string fullText = userInput.text;
 
+            fullText = fullText.Replace('\v', '\n');
+
             string[] lines = fullText.Split(new[]
-            { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+            { "\r\n", "\r", "\n"}, System.StringSplitOptions.None);
+
+/*            foreach (char c in lines[0])
+            {
+                Debug.Log($"Character: '{c}' :: ASCII VALUE IS: {System.Convert.ToInt32(c)}");
+            }*/
 
 
+            List<string> lines_ = new List<string>();
+
+            foreach (string line in lines_)
+            {
+                Debug.Log(line + " ");
+            }
+
+
+            // FOR ARRAYS
             for (int i = 0; i < lines.Length; i++)
             {
                 if (hadError)

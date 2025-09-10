@@ -69,8 +69,13 @@ namespace CYoureSharpPackage
                     break; */
                     // IGNORING WHITE SPACE
                 case ' ':
+                case '\n':
                 case '\r':
                 case '\t':
+                case '\'':
+                case '\"':
+                case '\b':
+                case '\v':
                     // IGNORING WHITE SPACE
                     break;
                 default:
@@ -84,7 +89,7 @@ namespace CYoureSharpPackage
                     }
                     else
                     {
-                        CYoureSharp.Error(line, "Unexpected Character");
+                        CYoureSharp.Error(line, $"Unexpected Character: '{c}'");
                     }
                     break;
             }
